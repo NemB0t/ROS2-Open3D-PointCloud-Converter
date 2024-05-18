@@ -8,23 +8,6 @@ import cv2
 def ROSpc2_to_O3DPointCloud(pc2):
 
     xyz,colors,min_intensity,max_intensity = ROSpc2_to_nparray(pc2)
-    #Currently the recovered_array contains array of all points in from the point cloud
-
-    # if len(recovered_array) == 0:
-    #     print("Converting an empty cloud")
-    #     return None
-    # if len(pc2.fields) == 4:  # TODO: Add code to handle intensity
-    #     xyz = [(x, y, z) for x, y, z, intensity in recovered_array]
-    # elif len(pc2.fields) == 3:
-    #     xyz = [(x, y, z) for x, y, z in recovered_array]
-    # else:
-    #     print("array of size" + len(pc2.fields) + " is not handled")
-    # xyz = np.array(recovered_array.tolist())[:,:3]
-    # xyz = np.nan_to_num(xyz,nan=np.float32(0))
-    # xyz = xyz[~np.isnan(xyz)]#Removing nan values
-    # xyz = xyz.reshape(pc2.width, pc2.height, 3)
-    # return xyz.reshape(-1,3)
-
     return nparray_to_O3DPointCloud(xyz,colors),min_intensity,max_intensity#3 cause xyz coordinates and intensity is 1
 
 
