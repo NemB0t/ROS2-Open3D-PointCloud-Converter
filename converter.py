@@ -2,7 +2,19 @@ import open3d as o3d
 import numpy as np
 from std_msgs.msg import Header
 from sensor_msgs.msg import PointCloud2, PointField
-import cv2
+
+
+def normalize_np(array, alpha=0, beta=65535):
+    # Calculate min and max values of the array
+    # This function is made to remove dependency on cv2
+    # The function simulates cv2.normalize(array, dst=None, alpha=0, beta=65535, norm_type=cv2.NORM_MINMAX)
+    min_val = np.min(array)
+    max_val = np.max(array)
+
+    # Normalize the array to the range [alpha, beta]
+    normalized_array = (array - min_val) / (max_val - min_val) * (beta - alpha) + alpha
+
+    return normalized_array
 
 # Reference: https://github.com/felixchenfy/open3d_ros_pointcloud_conversion/blob/master/lib_cloud_conversion_between_Open3D_and_ROS.py
 def ROSpc2_to_O3DPointCloud(pc2):
@@ -62,7 +74,7 @@ def ROSpc2_to_nparray(pc2):
         # If the intensity array is RGB encoded, first normalize it using opencv to 16-bit precision
         min_intensity = np.min(intensity)
         max_intensity = np.max(intensity)
-        intensities_norm = cv2.normalize(intensity, dst=None, alpha=0, beta=65535, norm_type=cv2.NORM_MINMAX)
+        intensities_norm = normalize_np(intensity,0,65535)
         # Using numpy.column_stack() provide equal values to RGB values and then assign to 'colors' property
         # of the point cloud.
         # Since Open3D point cloud's 'colors' property is float64 array of shape (num_points, 3), range [0, 1],
