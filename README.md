@@ -60,7 +60,7 @@ PC2 = converter.nparray_to_ROSpc2(xyz,"velodyne",intensity)
 ```
 **Note1: ** The xyz coodinates must be in the shape (N,3) and intensity must be in the shape (N,1) where N is the number of lidar points in the data.
 
-I made this code snippet as a helper function for lidar preprocessing node for  [UHRacing Autonomous](https://uk.linkedin.com/company/uh-racing-autonomous).  I was searching for a converter but I didn't find one that was working in ros-galactic,  hence lead to the creation of these functions.  I have posting it in my git so that anyone who faces the same issue in the future can use it.
+I made this code snippet as a helper function for lidar preprocessing node for  [UHRacing Autonomous](https://uk.linkedin.com/company/uh-racing-autonomous).  I was searching for a converter but I didn't find one that was working in ros-galactic,  hence lead to the creation of these functions.  I am posting it in my github so that anyone who faces the same issue in the future can use it.
 
 Tested on ros-galactic and ros-foxy with Open3D version 0.13.0.
 
